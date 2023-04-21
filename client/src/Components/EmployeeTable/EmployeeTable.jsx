@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import "./EmployeeTable.css";
 
-const EmployeeTable = ({ employees, onDelete }) => (
+const EmployeeTable = ({ employees, onDelete, handleSort }) => (
   <div className="EmployeeTable">
     <table>
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Level</th>
-          <th>Position</th>
+          <th onClick={() => handleSort("name")}>Name</th>
+          <th onClick={() => handleSort("level")}>Level</th>
+          <th onClick={() => handleSort("position")}>Position</th>
           <th />
         </tr>
       </thead>

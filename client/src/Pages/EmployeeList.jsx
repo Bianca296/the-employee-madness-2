@@ -16,6 +16,7 @@ const EmployeeList = () => {
   const [loading, setLoading] = useState(true);
   const [employees, setEmployees] = useState(null);
   const [filteredEmployees, setFilteredEmployees] = useState([]);
+  const [isDescOrder, setIsDescOrder] = useState({});
 
   const handleChange = (event) => {
     setFilteredEmployees(employees.filter((employee) => employee.position.toLowerCase().includes(event.target.value) ||
@@ -28,6 +29,21 @@ const EmployeeList = () => {
     setEmployees((employees) => {
       return employees.filter((employee) => employee._id !== id);
     });
+  };
+
+  const handleSort = (column) => {
+    setFilteredEmployees([...filteredEmployees].sort((a, b) => {
+      if (isDescOrder[column]) {
+        return b[column].localeCompare(a[column]);
+      } else {
+        return a[column].localeCompare(b[column]);
+      }
+    }));
+    if (isDescOrder[column]) {
+      setIsDescOrder({ ...isDescOrder, [column]: false })
+    } else {
+      setIsDescOrder({ ...isDescOrder, [column]: true })
+    }
   };
 
   useEffect(() => {
@@ -46,7 +62,7 @@ const EmployeeList = () => {
   return (
     <>
       <input type="text" placeholder="Search" onChange={handleChange} />
-      <EmployeeTable employees={filteredEmployees} onDelete={handleDelete} />
+      <EmployeeTable employees={filteredEmployees} onDelete={handleDelete} handleSort={handleSort} />
     </>
   )
 };
