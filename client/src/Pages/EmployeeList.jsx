@@ -15,6 +15,12 @@ const deleteEmployee = (id) => {
 const EmployeeList = () => {
   const [loading, setLoading] = useState(true);
   const [employees, setEmployees] = useState(null);
+  const [filteredEmployees, setFilteredEmployees] = useState([]);
+
+  const handleChange = (event) => {
+    setFilteredEmployees(employees.filter((employee) => employee.position.toLowerCase().includes(event.target.value) ||
+      employee.level.toLowerCase().includes(event.target.value)));
+  };
 
   const handleDelete = (id) => {
     deleteEmployee(id);
@@ -29,6 +35,7 @@ const EmployeeList = () => {
       .then((employees) => {
         setLoading(false);
         setEmployees(employees);
+        setFilteredEmployees(employees);
       })
   }, []);
 
@@ -36,7 +43,12 @@ const EmployeeList = () => {
     return <Loading />;
   }
 
-  return <EmployeeTable employees={employees} onDelete={handleDelete} />;
+  return (
+    <>
+      <input type="text" placeholder="Search" onChange={handleChange} />
+      <EmployeeTable employees={filteredEmployees} onDelete={handleDelete} />
+    </>
+  )
 };
 
 export default EmployeeList;
