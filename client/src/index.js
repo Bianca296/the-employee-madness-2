@@ -8,6 +8,9 @@ import ErrorPage from "./Pages/ErrorPage";
 import EmployeeList from "./Pages/EmployeeList";
 import EmployeeCreator from "./Pages/EmployeeCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
+import EmployeeEquipment from "./Pages/EmployeeEquipment";
+import EquipmentCreator from "./Pages/EquipmentCreator";
+import EquipmentUpdater from "./Pages/EquipmentUpdater";
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
@@ -38,6 +41,18 @@ const router = createBrowserRouter([
       {
         path: "/form-test",
         element: <FormTest />,
+      },
+      {
+        path: "/equipments",
+        element: <EmployeeEquipment />,
+      },
+      {
+        path: "/equipments/create",
+        element: <EquipmentCreator />,
+      },
+      {
+        path: "/equipments/update/:id",
+        element: <EquipmentUpdater />,
       },
     ],
   },
