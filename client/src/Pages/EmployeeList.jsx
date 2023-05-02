@@ -61,7 +61,7 @@ const EmployeeList = () => {
 
   return (
     <>
-      <input type="text" placeholder="Search" onChange={handleChange} />
+      <input type="text" placeholder="Search by Position/Level" onChange={handleChange} />
       <EmployeeTable employees={filteredEmployees} onDelete={handleDelete} handleSort={handleSort} />
     </>
   )

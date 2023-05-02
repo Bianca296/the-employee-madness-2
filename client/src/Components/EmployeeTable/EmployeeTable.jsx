@@ -6,9 +6,9 @@ const EmployeeTable = ({ employees, onDelete, handleSort }) => (
     <table>
       <thead>
         <tr>
-          <th onClick={() => handleSort("name")}>Name</th>
-          <th onClick={() => handleSort("level")}>Level</th>
-          <th onClick={() => handleSort("position")}>Position</th>
+          <th className="SortAscDesc" onClick={() => handleSort("name")}>Name</th>
+          <th className="SortAscDesc" onClick={() => handleSort("level")}>Level</th>
+          <th className="SortAscDesc" onClick={() => handleSort("position")}>Position</th>
           <th />
         </tr>
       </thead>

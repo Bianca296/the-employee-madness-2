@@ -10,7 +10,7 @@ const deleteEquipments = (id) => {
     return fetch(`/api/equipments/${id}`, { method: "DELETE" }).then((res) => res.json());
 };
 
-const EmployeeEquipment = () => {
+const EquipmentList = () => {
 
     const [loading, setLoading] = useState(true);
     const [equipments, setEquipments] = useState([]);
@@ -40,4 +40,4 @@ const EmployeeEquipment = () => {
     )
 };
 
-export default EmployeeEquipment;
+export default EquipmentList;
