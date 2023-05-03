@@ -12,15 +12,15 @@ const deleteEmployee = (id) => {
   );
 };
 
-const EmployeeList = () => {
+const EmployeeMissing = () => {
   const [loading, setLoading] = useState(true);
   const [employees, setEmployees] = useState(null);
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [isDescOrder, setIsDescOrder] = useState({});
 
   const handleChange = (event) => {
-    setFilteredEmployees(employees.filter((employee) => employee.position.toLowerCase().includes(event.target.value) ||
-      employee.level.toLowerCase().includes(event.target.value)));
+    setFilteredEmployees(employees.filter((employee) => !employee.present && (employee.position.toLowerCase().includes(event.target.value) ||
+      employee.level.toLowerCase().includes(event.target.value))));
   };
 
   const handleDelete = (id) => {
@@ -61,7 +61,7 @@ const EmployeeList = () => {
       .then((employees) => {
         setEmployees(employees);
         setLoading(false);
-        setFilteredEmployees(employees);
+        setFilteredEmployees(employees.filter((employee) => !employee.present));
       })
   }, []);
 
@@ -77,4 +77,4 @@ const EmployeeList = () => {
   )
 };
 
-export default EmployeeList;
+export default EmployeeMissing;

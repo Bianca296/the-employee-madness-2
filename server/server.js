@@ -101,6 +101,18 @@ app.delete("/api/equipments/:id", async (req, res, next) => {
   }
 });
 
+app.patch("/api/employees/:id/present", async (req, res, next) => {
+  try {
+    const present = await EmployeeModel.findOneAndUpdate(
+      { _id: req.params.id },
+      { present: req.body.present }
+    );
+    return res.json(present);
+  } catch (err) {
+    return next(err);
+  }
+});
+
 const main = async () => {
   await mongoose.connect(MONGO_URL);
 

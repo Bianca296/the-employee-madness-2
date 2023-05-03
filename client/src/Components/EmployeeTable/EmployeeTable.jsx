@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./EmployeeTable.css";
 
-const EmployeeTable = ({ employees, onDelete, handleSort }) => (
+const EmployeeTable = ({ employees, onDelete, handleSort, handleAttendance }) => (
   <div className="EmployeeTable">
     <table>
       <thead>
@@ -9,6 +9,7 @@ const EmployeeTable = ({ employees, onDelete, handleSort }) => (
           <th className="SortAscDesc" onClick={() => handleSort("name")}>Name</th>
           <th className="SortAscDesc" onClick={() => handleSort("level")}>Level</th>
           <th className="SortAscDesc" onClick={() => handleSort("position")}>Position</th>
+          <th>Present</th>
           <th />
         </tr>
       </thead>
@@ -18,6 +19,7 @@ const EmployeeTable = ({ employees, onDelete, handleSort }) => (
             <td>{employee.name}</td>
             <td>{employee.level}</td>
             <td>{employee.position}</td>
+            <td> <input type="checkbox" onChange={(event) => handleAttendance(event, employee._id)} defaultChecked={employee.present} /> </td>
             <td>
               <Link to={`/update/${employee._id}`}>
                 <button type="button">Update</button>
