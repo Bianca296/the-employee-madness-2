@@ -4,6 +4,7 @@ import Loading from '../Loading';
 const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
 
   const [equipments, setEquipments] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchEquipments = async () => {
@@ -11,9 +12,21 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
     return await res.json();
   };
 
+  const fetchBrands = async () => {
+    const res = await fetch("/api/brands");
+    return await res.json();
+  };
+
   useEffect(() => {
     fetchEquipments().then((equipments) => {
       setEquipments(equipments);
+      setLoading(false);
+    })
+  }, []);
+
+  useEffect(() => {
+    fetchBrands().then((brands) => {
+      setBrands(brands);
       setLoading(false);
     })
   }, []);
@@ -74,6 +87,16 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
         <select name="equipment" defaultValue={employee ? employee.equipment : null}>
           {equipments.map(equipment => (
             <option value={equipment._id} key={equipment._id}>{equipment.name}</option>
+          ))
+          }
+        </select>
+      </div>
+
+      <div className="control">
+        <label htmlFor="brand">Favorite brand:</label>
+        <select name="brand" defaultValue={employee ? employee.brand : null}>
+          {brands.map(brand => (
+            <option value={brand._id} key={brand._id}>{brand.name}</option>
           ))
           }
         </select>
