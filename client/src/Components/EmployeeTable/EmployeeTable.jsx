@@ -9,6 +9,7 @@ const EmployeeTable = ({ employees, onDelete, handleSort, handleAttendance }) =>
           <th className="SortAscDesc" onClick={() => handleSort("name")}>Name</th>
           <th className="SortAscDesc" onClick={() => handleSort("level")}>Level</th>
           <th className="SortAscDesc" onClick={() => handleSort("position")}>Position</th>
+          <th>Equipment</th>
           <th>Present</th>
           <th />
         </tr>
@@ -19,6 +20,7 @@ const EmployeeTable = ({ employees, onDelete, handleSort, handleAttendance }) =>
             <td>{employee.name}</td>
             <td>{employee.level}</td>
             <td>{employee.position}</td>
+            <td>{employee.equipment.name}</td>
             <td> <input type="checkbox" onChange={(event) => handleAttendance(event, employee._id)} defaultChecked={employee.present} /> </td>
             <td>
               <Link to={`/update/${employee._id}`}>

@@ -29,6 +29,9 @@ const EmployeeList = () => {
     setEmployees((employees) => {
       return employees.filter((employee) => employee._id !== id);
     });
+    setFilteredEmployees((employees) => {
+      return employees.filter((employee) => employee._id !== id);
+    });
   };
 
   const handleSort = (column) => {

@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/api/employees/", async (req, res) => {
-  const employees = await EmployeeModel.find().sort({ created: "desc" });
+  const employees = await EmployeeModel.find().populate("equipment").sort({ created: "desc" });
   return res.json(employees);
 });
 

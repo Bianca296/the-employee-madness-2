@@ -12,6 +12,10 @@ const EmployeeSchema = new Schema({
     default: Date.now,
   },
   present: Boolean,
+  equipment: {
+    type: Schema.Types.ObjectId,
+    ref: "Equipment"
+  },
 });
 
 module.exports = mongoose.model("Employee", EmployeeSchema);

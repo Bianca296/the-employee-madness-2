@@ -24,11 +24,14 @@ const pick = (from) => from[Math.floor(Math.random() * (from.length - 0))];
 const populateEmployees = async () => {
   await EmployeeModel.deleteMany({});
 
+  const equipmentsName = await EquipmentModel.find().lean();
+
   const employees = names.map((name) => ({
     name,
     level: pick(levels),
     position: pick(positions),
     present: false,
+    equipment: pick(equipmentsName),
   }));
 
   await EmployeeModel.create(...employees);
@@ -51,9 +54,9 @@ const populateEquipments = async () => {
 const main = async () => {
   await mongoose.connect(mongoUrl);
 
-  await populateEmployees();
   await populateEquipments();
-
+  await populateEmployees();
+ 
   await mongoose.disconnect();
 };
 

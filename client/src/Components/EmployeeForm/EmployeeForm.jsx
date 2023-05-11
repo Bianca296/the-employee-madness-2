@@ -1,4 +1,24 @@
+import { useEffect, useState } from 'react';
+import Loading from '../Loading';
+
 const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
+
+  const [equipments, setEquipments] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchEquipments = async () => {
+    const res = await fetch("/api/equipments");
+    return await res.json();
+  };
+
+  useEffect(() => {
+    fetchEquipments().then((equipments) => {
+      setEquipments(equipments);
+      setLoading(false);
+    })
+  }, []);
+
+
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -12,6 +32,9 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
 
     return onSave(employee);
   };
+
+  if(loading)
+    return <Loading />
 
   return (
     <form className="EmployeeForm" onSubmit={onSubmit}>
@@ -44,6 +67,16 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
           name="position"
           id="position"
         />
+      </div>
+
+      <div className="control">
+        <label htmlFor="equipment">Equipment:</label>
+        <select name="equipment" defaultValue={employee ? employee.equipment : null}>
+          {equipments.map(equipment => (
+            <option value={equipment._id} key={equipment._id}>{equipment.name}</option>
+          ))
+          }
+        </select>
       </div>
 
       <div className="buttons">
